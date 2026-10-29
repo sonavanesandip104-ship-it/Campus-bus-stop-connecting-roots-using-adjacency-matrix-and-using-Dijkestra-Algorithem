@@ -1,0 +1,138 @@
+
+#include <iostream>
+#include <string>
+#include <climits>
+using namespace std;
+
+const int N = 6;
+const int INF = 999999;
+
+string places[N] = {
+    "Sangamner",
+    "Ghulewadi",
+    "Loni",
+    "Shirdi",
+    "Rahata",
+    "Rajapur"
+};
+
+// Adjacency Matrix representing distances in kilometres
+int graph[N][N] = {
+    {0,   5,   25,  INF, INF, INF},
+    {5,   0,   22,  INF, INF, 18},
+    {25,  22,  0,   20,  12,  INF},
+    {INF, INF, 20,  0,   10,  25},
+    {INF, INF, 12,  10,  0,   15},
+    {INF, 18,  INF, 25,  15,  0}
+};
+
+// Display all places
+void displayPlaces() {
+    cout << "\nAvailable Places:\n";
+
+    for (int i = 0; i < N; i++) {
+        cout << i << ". " << places[i] << endl;
+    }
+}
+
+// Display all direct routes
+void displayRoutes() {
+    cout << "\nDirect Bus Routes:\n";
+
+    for (int i = 0; i < N; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if (graph[i][j] != INF) {
+                cout << places[i] << " <--> "
+                     << places[j] << " : "
+                     << graph[i][j] << " km\n";
+            }
+        }
+    }
+}
+
+// BFS to find reachable places
+void BFS(int start) {
+    bool visited[N] = {false};
+    int queue[N];
+    int front = 0, rear = 0;
+
+    visited[start] = true;
+    queue[rear++] = start;
+
+    cout << "\nPlaces reachable from "
+         << places[start] << ":\n";
+
+    while (front < rear) {
+        int current = queue[front++];
+
+        cout << places[current] << endl;
+
+        for (int i = 0; i < N; i++) {
+            if (graph[current][i] != INF &&
+                graph[current][i] != 0 &&
+                !visited[i]) {
+
+                visited[i] = true;
+                queue[rear++] = i;
+            }
+        }
+    }
+}
+
+// Dijkstra's algorithm for shortest route
+void shortestRoute(int source, int destination) {
+    int distance[N];
+    int parent[N];
+    bool visited[N] = {false};
+
+    for (int i = 0; i < N; i++) {
+        distance[i] = INF;
+        parent[i] = -1;
+    }
+
+    distance[source] = 0;
+
+    for (int count = 0; count < N; count++) {
+        int u = -1;
+        int minimum = INF;
+
+        for (int i = 0; i < N; i++) {
+            if (!visited[i] && distance[i] < minimum) {
+                minimum = distance[i];
+                u = i;
+            }
+        }
+
+        if (u == -1)
+            break;
+
+        visited[u] = true;
+
+        for (int v = 0; v < N; v++) {
+            if (graph[u][v] != INF &&
+                graph[u][v] != 0 &&
+                !visited[v] &&
+                distance[u] + graph[u][v] < distance[v]) {
+
+                distance[v] = distance[u] + graph[u][v];
+                parent[v] = u;
+            }
+        }
+    }
+
+    if (distance[destination] == INF) {
+        cout << "\nNo route available.\n";
+        return;
+    }
+
+    int path[N];
+    int length = 0;
+
+    for (int v = destination; v != -1; v = parent[v]) {
+        path[length++] = v;
+    }
+
+    cout << "\nShortest Route:\n";
+
+    for (int i = length - 1; i >= 0; i--) {
+
