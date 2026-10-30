@@ -11,6 +11,7 @@ To store connections and distances using an adjacency matrix.
 To find reachable places using Breadth-First Search (BFS).
 To calculate the shortest route using Dijkstra's algorithm.
 To calculate the longest simple route using DFS and backtracking.
+
 ** **Places Included*****
 Sangamner
 Ghulewadi
@@ -24,6 +25,7 @@ Data Structure: Graph
 Graph Representation: Adjacency Matrix
 Algorithms: BFS, Dijkstra's Algorithm, DFS and Backtracking
 IDE: Visual Studio Code
+
 ✨** **Features****
 Display all available places.
 Display direct routes and sample distances.
@@ -31,6 +33,7 @@ Find reachable places from a selected location.
 Find the shortest route between two places.
 Find the longest simple route between two places.
 Interactive menu-driven interface.
+
  **Algorithms Used**
 1. Breadth-First Search (BFS)
 
