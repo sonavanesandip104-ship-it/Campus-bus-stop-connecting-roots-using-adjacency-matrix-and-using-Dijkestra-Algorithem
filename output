@@ -1,1 +1,99 @@
+REGIONAL BUS ROUTE NAVIGATION SYSTEM
+====================================
+1. Display All Places
+2. Display Direct Bus Routes
+3. Find Reachable Places using BFS
+4. Find Shortest Route
+5. Find Longest Simple Route
+6. Find Both Shortest and Longest Routes
+7. Exit
+
+Enter your choice: 4
+
+Available Places:
+0. Sangamner
+1. Ghulewadi
+2. Loni
+3. Shirdi
+4. Rahata
+5. Rajapur
+Enter source place number: 2
+Enter destination place number: 5
+
+Shortest Route:
+Loni -> Rahata -> Rajapur
+Total Distance: 27 km
+
+====================================
+ REGIONAL BUS ROUTE NAVIGATION SYSTEM
+====================================
+1. Display All Places
+2. Display Direct Bus Routes
+3. Find Reachable Places using BFS
+4. Find Shortest Route
+5. Find Longest Simple Route
+6. Find Both Shortest and Longest Routes
+7. Exit
+
+Enter your choice: 5
+
+Available Places:
+0. Sangamner
+1. Ghulewadi
+2. Loni
+3. Shirdi
+4. Rahata
+5. Rajapur
+Enter source place number: 2
+Enter destination place number: 5
+
+Longest Simple Route:
+Loni -> Sangamner -> Ghulewadi -> Rajapur
+Total Distance: 48 km
+
+====================================
+ REGIONAL BUS ROUTE NAVIGATION SYSTEM
+====================================
+1. Display All Places
+2. Display Direct Bus Routes
+3. Find Reachable Places using BFS
+4. Find Shortest Route
+5. Find Longest Simple Route
+6. Find Both Shortest and Longest Routes
+7. Exit
+
+Enter your choice: 6
+
+Available Places:
+0. Sangamner
+1. Ghulewadi
+2. Loni
+3. Shirdi
+4. Rahata
+5. Rajapur
+Enter source place number: 0
+Enter destination place number: 3
+
+Shortest Route:
+Sangamner -> Loni -> Shirdi
+Total Distance: 45 km
+
+Longest Simple Route:
+Sangamner -> Loni -> Ghulewadi -> Rajapur -> Shirdi
+Total Distance: 90 km
+
+====================================
+ REGIONAL BUS ROUTE NAVIGATION SYSTEM
+====================================
+1. Display All Places
+2. Display Direct Bus Routes
+3. Find Reachable Places using BFS
+4. Find Shortest Route
+5. Find Longest Simple Route
+6. Find Both Shortest and Longest Routes
+7. Exit
+
+Enter your choice: 7
+
+Thank you for using the system!
 
