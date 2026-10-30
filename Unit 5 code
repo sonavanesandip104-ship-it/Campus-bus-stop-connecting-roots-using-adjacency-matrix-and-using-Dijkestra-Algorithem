@@ -135,4 +135,163 @@ void shortestRoute(int source, int destination) {
     cout << "\nShortest Route:\n";
 
     for (int i = length - 1; i >= 0; i--) {
+        cout << places[path[i]];
 
+        if (i > 0)
+            cout << " -> ";
+    }
+
+    cout << "\nTotal Distance: "
+         << distance[destination] << " km\n";
+}
+
+// DFS with backtracking for longest simple route
+int longestDistance = -1;
+int longestPath[N];
+int currentPath[N];
+int longestLength = 0;
+
+void findLongestRouteDFS(int current, int destination,
+                         bool visited[], int distance,
+                         int depth) {
+
+    visited[current] = true;
+    currentPath[depth] = current;
+
+    if (current == destination) {
+        if (distance > longestDistance) {
+            longestDistance = distance;
+            longestLength = depth + 1;
+
+            for (int i = 0; i < longestLength; i++) {
+                longestPath[i] = currentPath[i];
+            }
+        }
+    } else {
+        for (int next = 0; next < N; next++) {
+            if (graph[current][next] != INF &&
+                graph[current][next] != 0 &&
+                !visited[next]) {
+
+                findLongestRouteDFS(
+                    next,
+                    destination,
+                    visited,
+                    distance + graph[current][next],
+                    depth + 1
+                );
+            }
+        }
+    }
+
+    visited[current] = false;
+}
+
+void longestRoute(int source, int destination) {
+    bool visited[N] = {false};
+
+    longestDistance = -1;
+    longestLength = 0;
+
+    findLongestRouteDFS(
+        source, destination, visited, 0, 0
+    );
+
+    if (longestDistance == -1) {
+        cout << "\nNo route available.\n";
+        return;
+    }
+
+    cout << "\nLongest Simple Route:\n";
+
+    for (int i = 0; i < longestLength; i++) {
+        cout << places[longestPath[i]];
+
+        if (i < longestLength - 1)
+            cout << " -> ";
+    }
+
+    cout << "\nTotal Distance: "
+         << longestDistance << " km\n";
+}
+
+// Main function
+int main() {
+    int choice;
+    int source, destination;
+
+    do {
+        cout << "\n====================================\n";
+        cout << " REGIONAL BUS ROUTE NAVIGATION SYSTEM\n";
+        cout << "====================================\n";
+
+        cout << "1. Display All Places\n";
+        cout << "2. Display Direct Bus Routes\n";
+        cout << "3. Find Reachable Places using BFS\n";
+        cout << "4. Find Shortest Route\n";
+        cout << "5. Find Longest Simple Route\n";
+        cout << "6. Find Both Shortest and Longest Routes\n";
+        cout << "7. Exit\n";
+
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                displayPlaces();
+                break;
+
+            case 2:
+                displayRoutes();
+                break;
+
+            case 3:
+                displayPlaces();
+                cout << "Enter starting place number: ";
+                cin >> source;
+
+                if (source >= 0 && source < N)
+                    BFS(source);
+                else
+                    cout << "Invalid place number!\n";
+
+                break;
+
+            case 4:
+            case 5:
+            case 6:
+                displayPlaces();
+
+                cout << "Enter source place number: ";
+                cin >> source;
+
+                cout << "Enter destination place number: ";
+                cin >> destination;
+
+                if (source < 0 || source >= N ||
+                    destination < 0 || destination >= N) {
+
+                    cout << "Invalid place number!\n";
+                    break;
+                }
+
+                if (choice == 4 || choice == 6)
+                    shortestRoute(source, destination);
+
+                if (choice == 5 || choice == 6)
+                    longestRoute(source, destination);
+
+                break;
+
+            case 7:
+                cout << "\nThank you for using the system!\n";
+                break;
+
+            default:
+                cout << "Invalid choice! Please try again.\n";
+        }
+
+    } while (choice != 7);
+
+    return 0;
+}
